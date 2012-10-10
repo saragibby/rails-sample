@@ -1,0 +1,15 @@
+= form_for @story_board, :remote => true, :html => {:id => 'story_board_save_background'} do |f|
+  = hidden_field_tag 'current_slide_id'
+  .field
+    = f.label :background
+    = f.select :background, ['iPad','iPhone','Web 1024','Web 1280']
+
+= select_tag :canvas_zoom, options_for_select((20..200).step(20).map{|x| ["#{x}%", x]}, 100)
+  
+#story-board-slides
+  - if @story_board.has_slides? && @story_board.clean?
+    = render 'sidebar_slides'
+
+- if @story_board.clean? and @story_board.has_slides?
+  #replace_image_dialog.dialog{:title => 'Replace Slide Image'}  
+    = render 'slides/edit_form', :story_board => @story_board, :slide => @selected_slide

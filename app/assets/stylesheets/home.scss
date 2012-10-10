@@ -1,0 +1,26 @@
+#home-main {
+  text-align: center;
+  padding-top: 30px;
+  #user_action {
+    margin-left: 300px;
+  }
+  h3 {
+    font-size: 18px;
+    color: #6d6e70;
+  }
+  p {
+    font-size: 18px;
+    color: #999;
+  }
+  p.red {
+    color: #c60000;
+  }
+  #notify p {
+    font-size: 16px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+  }
+  #notify form .field, #notify form .actions {
+    display: inline;
+  }
+}

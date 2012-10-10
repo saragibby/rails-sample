@@ -1,0 +1,27 @@
+#link_action_item          
+  = form_tag action_item_path, :method => 'put', :remote => true do 
+    %div#actions
+      = hidden_field_tag :action_item_id
+      = hidden_field_tag 'action_item[data[link_type]]'
+      
+      %div.action_options.link_view
+        .field
+          %span Link to:           
+          - slides = []
+          - slides << ["Choose a screen",""]
+          - @story_board.slides.each_with_index{|s,i| slides << ["#{i+1}. #{s.original_filename}", s.id]}
+          - slides << ["External Web Page", "external"]
+          = select_tag "action_item[data[internal_link]]", options_for_select(slides), :include_blank => false
+          
+        %ul.external_link_fields.hide
+          %li
+            %span Web page:
+            = text_field_tag "action_item[data[external_link]]"
+        
+        %ul
+          %li
+            = check_box_tag 'action_item[data[maintain_scroll]]'
+            %span Keep Scroll Position
+      
+      = render 'action_items/actions'
+          

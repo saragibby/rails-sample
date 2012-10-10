@@ -1,0 +1,15 @@
+- content_for :head do
+  - if @story_board.mobile_safari_layout?
+    %meta{'name' => 'apple-mobile-web-app-capable', :content => 'yes'}
+    %meta{'name' => 'apple-mobile-web-app-status-bar-style', :content => 'black'}
+    %meta{'name' => 'viewport', :content => 'width=device-width'}
+
+#preview_private
+  %h2= @story_board.title
+  
+  %h3 Please enter password to view.
+  = form_tag preview_story_board_path(@story_board), :id => 'preview_slide_form', :method => :get do
+    = hidden_field_tag 'current_slide_id', @selected_slide.id
+    = label_tag "story_board[password]", 'Password'
+    = password_field_tag "story_board[password]"
+    = submit_tag "View"

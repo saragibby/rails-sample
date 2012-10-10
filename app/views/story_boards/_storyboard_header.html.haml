@@ -1,0 +1,32 @@
+%span{:id => "StoryBoard_title_#{@story_board.id}", :class => 'title editable'}= @story_board.title
+%span{:id => 'security_level'}= link_to @story_board.security_level_desc, '#'
+
+#storyboard-menu
+  %span= link_to "File", "javascript:void(0);"
+  |
+  %span= link_to "Edit", "javascript:void(0);"
+  |
+  %span= link_to "Help", "javascript:void(0);"
+ 
+#story_board_security_dialog.dialog{:title => 'Privacy Settings'}
+  = form_for @story_board, :remote => true do |f|
+    = hidden_field 'current_security_level', @story_board.security_level
+    %div.save_error
+    .field
+      = f.radio_button :security_level, "public"
+      = label :security_level_public, 'Public on the web'
+      %p Anyone on the Internet can find and access.
+    .field
+      = f.radio_button :security_level, "link"
+      = label :security_level_public, 'Anyone with link'
+      %p Anyone with the link can access.
+    .field.private
+      = f.radio_button :security_level, "private"
+      = label :security_level_private, 'private'
+      %p Only people explicitly granted permission can access.
+    .field.password
+      = f.label :password
+      = f.text_field :password
+    .action
+      = f.submit "Save"
+      = button_to "Cancel", '#', :class => 'cancel'

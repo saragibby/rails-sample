@@ -1,0 +1,19 @@
+#gif_action_item
+  = form_tag action_item_path, :method => 'put', :remote => true, :multipart => true do 
+    = hidden_field_tag :action_item_id
+
+    %div#gifs.action_options
+      %p Select animated gif
+      - (1..4).each do |num|
+        .field
+          = radio_button nil, "action_item[data[gif_image]]", "ajax-loader-#{num}"
+          = image_tag("ajax-loader-#{num}.gif")
+      .field
+        = radio_button nil, "action_item[data[gif_image]]", ""
+        = label_tag "Choose my own image"
+      .field
+        .image
+        = link_to image_tag('delete.gif'), '#', :class => 'delete_image'
+        = file_field :action_item, :user_gif, :accept => 'image/png,image/gif,image/jpeg'
+        
+    = render 'action_items/actions'

@@ -1,0 +1,10 @@
+#site-header.ui-layout-north
+  #site-logo
+    Rails Sample
+    - unless Rails.env == 'production'
+      %strong= "** #{Rails.env} **"
+  #site-top-nav
+    - if user_signed_in?
+      = render "shared/user_header"
+    - else
+      = render "shared/guest_header"

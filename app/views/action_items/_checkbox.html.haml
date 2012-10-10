@@ -1,0 +1,19 @@
+#checkbox_action_item
+  = form_tag action_item_path, :method => 'put', :remote => true do 
+    = hidden_field_tag :action_item_id
+
+    %div.action_options.checkbox_view
+      = label_tag "Checkmark to use:"
+      %ul
+        %li
+          = radio_button_tag "action_item[data[checkbox_type]]", "check_mark", true, :class => 'checkbox'
+          %div.check_box_choice= image_tag 'check_mark.png'
+        %li
+          = radio_button_tag "action_item[data[checkbox_type]]", "x_mark", false, :class => 'checkbox'
+          %div.check_box_choice= image_tag 'x_mark.png'
+      .clear
+      = label_tag 'Default checked'
+      = check_box_tag "action_item[data[checked]]", true
+      .clear
+      
+    = render 'action_items/actions'

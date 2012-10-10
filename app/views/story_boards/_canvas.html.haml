@@ -1,0 +1,12 @@
+- if @story_board.clean? && @story_board.has_slides?
+  #canvas{  :class => "#{@story_board.background}", :data => {:slide_id => @selected_slide.id, :story_board_id => @story_board.id,
+                                                              :width => visible_canvas_width(@story_board), 
+                                                              :height => visible_canvas_height(@story_board,@selected_slide)} }
+    #right-gutter{:style => right_gutter_style(@story_board,@selected_slide), :data => right_gutter_data(@story_board,@selected_slide)}
+    #bottom-gutter{:style => bottom_gutter_style(@story_board,@selected_slide), :data => bottom_gutter_data(@story_board,@selected_slide)}
+    = image_tag @selected_slide.image.url(:web), :id => 'canvas_image', :data => { :width =>  @selected_slide.image_width, :height => @selected_slide.image_height }
+- elsif @story_board.clean? && !@story_board.has_slides?
+  #canvas{ :class => "#{@story_board.background}", :data => { :story_board_id => @story_board.id } }
+    %p No Slides Added To Storyboard
+- else
+  #canvas{ :class => "#{@story_board.background}", :data => { :story_board_id => @story_board.id } }

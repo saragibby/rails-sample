@@ -1,0 +1,19 @@
+- content_for :head do
+  - if @story_board.mobile_safari_layout?
+    %meta{'name' => 'apple-mobile-web-app-capable', :content => 'yes'}
+    %meta{'name' => 'apple-mobile-web-app-status-bar-style', :content => 'black'}
+    %meta{'name' => 'viewport', :content => 'width=device-width'}
+
+#preview{:data => { :slide_id => @selected_slide.id, 
+                    :transfer_to_slide_id => @selected_slide.transfer_to_slide_id,
+                    :transfer_wait => @selected_slide.transfer_wait }, 
+         :style => preview_style(@story_board,@selected_slide) }
+         
+  = image_tag @selected_slide.image.url(:web), :size => @selected_slide.image_width.to_s() + "x" + @selected_slide.image_height.to_s()
+  - @selected_slide.action_items.order_by_top.each_with_index do |action_item,index|
+    .action_item{ :data => action_item.data_attrs.merge({"tabindex" => index+1}), :image_url => image_url(action_item) }
+  
+#preload
+  - @story_board.slides.each do |slide|
+    - if slide.id != @selected_slide.id
+      = image_tag slide.image.url(:web), :size => slide.image_width.to_s() + "x" + slide.image_height.to_s()

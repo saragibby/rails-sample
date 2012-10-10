@@ -1,0 +1,28 @@
+#text_action_item           
+  = form_tag action_item_path, :method => 'put', :remote => true, :class => 'action_item_form' do 
+    %div#actions
+      = hidden_field_tag :action_item_id
+
+      %div.action_options.text_view
+        %ul
+          %li
+            = radio_button_tag "action_item[data[text_box_lines]]", "single", true, :class => 'text_lines'
+            %span Single line
+          %li
+            = radio_button_tag "action_item[data[text_box_lines]]", "multiple", false, :class => 'text_lines'
+            %span Multiple lines
+        .field
+          = label_tag 'Font type'
+          = select nil, "action_item[data[font_type]]", ActionItem::FONTS, {}, {:class => 'font-type'}
+        .field
+          = select nil, "action_item[data[font_color]]", options_for_select(ActionItem::FONT_COLORS,'000000'), {}, {:class => 'font-colorpicker'}
+        .field
+          = label_tag 'Font size'
+          = select nil, "action_item[data[font_size]]", options_for_select((5..20).each{|x| ['%dpt' % x, x]},"14"), {}, {:class => 'font-size'}
+        .field
+          = select nil, "action_item[data[background_color]]", options_for_select(ActionItem::BACKGROUND_COLORS, 'transparent'), {}, {:class => 'background-colorpicker'}
+        .field
+          = label_tag 'Variable name'
+          = text_field_tag "action_item[data[save_variable]]", nil, {:onkeypress => 'return View.validateVariableName(event)'}
+      
+      = render 'action_items/actions'

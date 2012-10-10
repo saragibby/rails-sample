@@ -1,0 +1,27 @@
+#home-main
+  #user_action
+    - if user_signed_in?
+      = link_to 'My Storyboards', story_boards_path
+    - else
+      = button_to 'Login', '#', :id => 'home_page_login'
+
+  = image_tag 'logo.png', :size => '326×94'
+  %h3 Super fast lean prototyping...
+  %p 
+    to easily and quickly communicate
+    %br
+    the essence of your web product to
+    %br
+    the world to see if it will work.
+    
+  %p.red Yes, we'll be here soon.
+  
+  #notify
+    %p Notify me when you launch
+    = form_for UserProspect.new do |f|
+      .field= f.text_field :email, :placeholder => 'Email Address'
+      .actions
+        = f.submit "Notify"
+
+#sign_in_dialog.dialog{:title => 'Sign In'}
+  = render "shared/sign_in_form"

@@ -1,0 +1,10 @@
+= form_for story_board, :url => [story_board,slide], :method => :put, :html => { :multipart => true }  do |f|
+  = hidden_field_tag 'current_slide_id', params[:current_slide_id]
+  = text_field_tag 'slide_id', '', :class => 'hidden'
+  
+  %p Upload slide image
+
+  .field= file_field_tag 'upload'
+      
+  .actions
+    = f.submit 'Save'

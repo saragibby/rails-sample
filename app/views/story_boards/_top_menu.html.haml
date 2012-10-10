@@ -1,0 +1,27 @@
+- if @story_board.clean?
+  %ul#story_board_menu
+    %li
+      = form_tag new_story_board_slide_path(@story_board), :id => 'add_slide_form', :method => :get do
+        - if @selected_slide.present?
+          = hidden_field_tag 'current_slide_id', @selected_slide.id
+        = link_to "Add slide"
+        = submit_tag 'Add', :class => 'hidden'
+
+    - if @story_board.has_slides?
+      %li
+        = form_tag preview_story_board_path(@story_board), :id => 'preview_slide_form', :method => :get do
+          = hidden_field_tag 'current_slide_id', @selected_slide.id
+          = link_to "Preview"
+  
+    %li
+      = link_to 'Share', '#share_url', :id => 'share_link'
+      %div#share_url
+        .field
+          = label_tag 'URL'
+          .value= "#{preview_story_board_url(@story_borad)}"
+
+  - if @story_board.has_slides?
+    #slide_menu= render 'slide_menu' 
+  
+- else
+  %p Loading...

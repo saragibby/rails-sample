@@ -1,0 +1,53 @@
+%h1= @story_board.title
+
+- content_for :head do
+  = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/base/jquery-ui.css', :id => 'theme'
+  = stylesheet_link_tag 'fileupload-ui'
+  
+- content_for :scripts do
+  = javascript_include_tag "http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"
+  = javascript_include_tag "http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"
+  = javascript_include_tag "http://blueimp.github.com/jQuery-Image-Gallery/js/jquery.image-gallery.min.js"
+  = javascript_include_tag 'jquery.iframe-transport'
+  = javascript_include_tag 'jquery.fileupload'
+  = javascript_include_tag 'jquery.fileupload-fp'
+  = javascript_include_tag 'jquery.fileupload-ui'
+  = javascript_include_tag 'jquery.fileupload-jui'
+  = javascript_include_tag 'file_upload'                  
+      
+- if @slide.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(@slide.errors.count, "error")} prohibited this slide from being saved:"
+    %ul
+      - @slide.errors.full_messages.each do |msg|
+        %li= msg
+
+%h2 Upload New Slide
+= form_for @story_board, :url => [@story_board,@slide], :method => :post, :html => { :class => "upload", :multipart => true }  do |f|
+  = hidden_field_tag 'current_slide_id', params[:current_slide_id]
+
+  %p Upload slide image
+  %ul
+    - StoryBoard::FILE_TYPES_ALLOWED.each do |file_ext|
+      %li= file_ext
+    = link_to 'more...', '#'
+  %p Note: each slide or page will be converted to it's own screen with upload.
+
+  .row.fileupload-buttonbar
+    .span7
+      %span.btn.btn-success.fileinput-button
+        %span Add files...
+        = file_field_tag 'story_board[attachments_attributes][]', :multiple => true, :accept => 'image/png,image/gif,image/jpeg,application/pdf'
+      = submit_tag 'Start upload', :class => "btn btn-primary start"
+      = link_to 'Cancel', @story_board, :method => :get, :class => "btn btn-warning cancel"
+    .span5
+      .progress.progress-success.progress-striped.active.fade
+        .bar{:style => 'width:0%;'}
+
+  .fileupload-loading
+  %table.table.table-striped{'data-toggle' => "modal-gallery", 'data-target' => "#modal-gallery"}
+    %tbody.files
+
+  .well
+
+= render 'shared/file_upload_templates'

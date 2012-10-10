@@ -1,0 +1,49 @@
+<% if @story_board.clean? %> 
+  $('#replace_image_dial og').html("<%= escape_javascript render(:partial => "slides/edit_form", :locals => {:story_board => @story_board, :slide => @selected_slide}) %>");
+  $('#selected-slide').html("<%= escape_javascript render(:partial => "canvas") %>");
+  $('#action-selector-form').html("<%= escape_javascript render(:partial => "action_selector_form") %>");
+  $('#top_menu').html("<%= escape_javascript render(:partial => "top_menu") %>");
+  $('#story-board-slides').html("<%= escape_javascript render(:partial => "sidebar_slides") %>");
+  $('#selected-slide').html("<%= escape_javascript render(:partial => "canvas") %>");
+  $('#slide_menu').html("<%= escape_javascript render(:partial => "slide_menu") %>");
+  
+  $('#current_slide_id').val(<%= @selected_slide.id %>);
+  StoryBoard.get_slide(<%= @selected_slide.id %>);
+  
+  $('#transition_link').click(function(){
+    $('#transition form').toggle();
+    return false;
+  });
+  
+  $('#remove_transition').click(function(){
+    $('#slide_transfer_to_slide_id').val(null);
+    $('#slide_transfer_wait').val(null);
+    $(this).closest('form').submit();
+    return false;
+  });
+
+  $('#transition_slide_selector').click(function(){
+    transition_slide_selecting = true;
+    return false;
+  });
+  
+  $('#add_slide_form a').click(function(){
+    $('#add_slide_form').submit();
+    return false;
+  });
+  
+  $('#share_link').click(function(){
+    $('#share_url').toggle();
+    return false;
+  });
+  
+  $('#preview_slide_form a').click(function(){
+    $('#preview_slide_form #current_slide_id').val($("#canvas").data("slide_id"));
+    $('#preview_slide_form').submit();
+    return false;
+  });
+  
+  StoryBoard.setup_slide_right_click_menu();
+  StoryBoard.setup_sortable_sidebar();
+  StoryBoard.setup_jcrop();
+<% end %>

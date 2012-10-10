@@ -1,0 +1,13 @@
+%ul
+  - @story_board.slides.each_with_index do |slide, index|
+    %li.slide-image{:id => "slide-id-#{slide.id}", :class => slide_sidebar_class(slide,@selected_slide), :data => { :slide_id => slide.id }}
+      = link_to story_board_path(@story_board, :slide_id => slide.id), :remote => true do
+        = image_tag(slide.image.url(:small))
+        %p
+          :plain
+            #{index+1}. #{slide.original_filename} 
+      
+= form_tag story_board_slide_path(@story_board), :method => :put, :id => 'update_slide_form', :remote => true do
+  = hidden_field_tag :slide_id
+  = hidden_field_tag :current_slide_id
+  = hidden_field_tag 'slide[order_number]'

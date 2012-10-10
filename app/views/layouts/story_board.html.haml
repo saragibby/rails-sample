@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title Rails Sample
+    = stylesheet_link_tag :application
+    = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css'
+    = javascript_include_tag :application
+    = javascript_include_tag :story_board
+    = csrf_meta_tags
+
+  %body
+    = render "shared/header"
+    #site-body.ui-layout-center
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+      #storyboard-header.ui-layout-north= render 'storyboard_header'
+ 
+      #storyboard-body.ui-layout-center
+        #storyboard-editor-tools.ui-layout-north= render 'story_boards/toolbar'
+        #storyboard-editor-slides.ui-layout-west
+          #top_menu= yield :top_menu
+          #left_sidebar= yield :left_sidebar
+        #storyboard-editor-body.ui-layout-center= yield :main
+
+    = render "shared/footer"
+    %ul#myMenu.contextMenu
+      %li.move= link_to 'Move', '#'
+      %li.insert= link_to 'Insert', '#'
+      %li.delete= link_to 'Delete', '#destroy'
+      %li.quick_preview= link_to 'Preview', '#'
+      %li.replace_image= link_to 'Replace image', '#replace'
+      %li.cancel.separator= link_to 'Cancel', '#'
+    = javascript_include_tag 'story_boards'

@@ -1,0 +1,9 @@
+#radio_action_item
+  = form_tag action_item_path, :method => 'put', :remote => true do 
+    = hidden_field_tag :action_item_id
+
+    %div.action_options.radio_view
+      = label_tag 'Default selected'
+      = check_box_tag "action_item[data[selected]]", true
+    
+    = render 'action_items/actions'

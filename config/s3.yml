@@ -1,0 +1,18 @@
+development:
+  storage: :s3
+  bucket: rails-sample-dev
+  access_key_id: ABCDE123
+  secret_access_key: ABCDE123+HiJK789
+  
+  
+staging:
+  storage: :s3
+  bucket: rails-sample-staging
+  access_key_id: ABCDE123
+  secret_access_key: ABCDE123+HiJK789
+  
+production:
+  storage: :s3
+  bucket: rails-sample-prod
+  access_key_id: ABCDE123
+  secret_access_key: ABCDE123+HiJK789

@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title Rails Sample
+    = csrf_meta_tags
+    = stylesheet_link_tag :preview
+    = yield :head
+  %body#story_board_preview
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    = yield
+
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
+    = javascript_include_tag :story_board_preview

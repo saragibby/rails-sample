@@ -1,0 +1,40 @@
+#preview {
+  position: relative;
+  overflow: hidden;
+  .spinner {
+    position: absolute;
+  }
+  input[type='text'] {
+    padding-left: 5px;
+    border: 0;
+    background: url('/assets/transparent.png');
+  }
+}
+
+.action_item {
+  position: absolute;
+  background: url('/assets/transparent.png');
+}
+
+body#story_board_preview{
+  margin: 0;
+}
+
+.action_item.add_padding {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.action_item.variable {
+  padding-left: 5px;
+  p {
+    margin: 0;
+    vertical-align: middle;
+    display: inline;
+  }
+}
+
+#preload {
+  display: none;
+}

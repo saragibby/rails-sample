@@ -1,0 +1,18 @@
+/ - content_for :head do
+/   = stylesheet_link_tag "plupload.queue"
+/   = javascript_include_tag "plupload/plupload.full", "plupload/plupload.queue"
+/   #uploader_script
+/     = javascript_tag do
+/       = render "shared/plupload.js"
+
+- content_for :top_menu do
+  = render 'top_menu'
+
+- content_for :left_sidebar do
+  = render 'sidebar'
+
+- content_for :main do
+  #selected-slide= render 'canvas'
+  #action-selector-form
+    - if @story_board.has_slides?
+      = render 'action_selector_form'

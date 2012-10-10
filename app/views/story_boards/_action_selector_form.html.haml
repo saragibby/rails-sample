@@ -1,0 +1,9 @@
+- if @story_board.clean?
+  = render 'action_items/checkbox'
+  = render 'action_items/gif'
+  = render 'action_items/link'
+  = render 'action_items/radio'
+  = render 'action_items/text'
+  = render 'action_items/variable'
+- else
+  %p Loading...

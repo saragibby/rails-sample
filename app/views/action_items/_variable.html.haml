@@ -1,0 +1,18 @@
+#variable_action_item
+  = form_tag action_item_path, :method => 'put', :remote => true do 
+    = hidden_field_tag :action_item_id
+
+    %div.action_options.variable_view
+      .field
+        = label_tag 'Variable name'
+        = select nil,  "action_item[data[insert_variable]]", options_for_select(@story_board.variables), {}, {:class => 'insert-variable'}
+      .field
+        = label_tag 'Font type'
+        = select nil, "action_item[data[var_font_type]]", ActionItem::FONTS, {}, {:class => 'var-font-type'}
+      .field
+        = select nil, "action_item[data[var_font_color]]", options_for_select(ActionItem::FONT_COLORS,'000000'), {}, {:class => 'var-font-colorpicker'}
+      .field
+        = label_tag 'Font size'
+        = select nil, "action_item[data[var_font_size]]", options_for_select((5..20).each{|x| ['%dpt' % x, x]},"14"), {}, {:class => 'var-font-size'}
+    
+    = render 'action_items/actions'

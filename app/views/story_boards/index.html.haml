@@ -1,0 +1,18 @@
+%h1 My Storyboards
+
+= link_to 'New Storyboard', new_story_board_path
+
+%table#my_story_boards
+  %thead
+    %th Title
+    %th
+    %th
+
+  %tbody
+    - @story_boards.each do |story_board|
+      %tr
+        %td= link_to story_board.title, story_board
+        %td
+        %td
+          = link_to 'Delete', story_board_path(story_board), :method => 'delete', :confirm => "Are you sure?"
+          = link_to 'Create a copy', duplicate_story_board_path(story_board)

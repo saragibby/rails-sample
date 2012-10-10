@@ -1,0 +1,16 @@
+%ul
+  %li#crop Crop
+  %li#resize Resize
+  %li#transition 
+    = link_to 'Timed Transition', '#', :id => 'transition_link'
+    = form_for [@story_board, @selected_slide], :html => {:class => 'hidden'} do |f|
+      = f.hidden_field :transfer_to_slide_id
+      .field
+        = f.label :transfer_to_slide_id, 'Transition to slide'
+        = link_to 'Select slide', '#', :id => 'transition_slide_selector'
+      .field
+        = f.label :transfer_wait, 'Seconds to wait before transition'
+        = f.text_field :transfer_wait, :size => 10
+      .actions
+        = submit_tag :done
+        = link_to 'Remove', '#', :id => 'remove_transition'

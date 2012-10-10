@@ -1,0 +1,4 @@
+$('span#security_level a').text('<%= @story_board.security_level_desc %>');
+$('#story_board_security_dialog').dialog('close');
+$('#selected-slide').html("<%= escape_javascript render(:partial => "canvas") %>");
+StoryBoard.get_slide(<%= @selected_slide.id %>);
